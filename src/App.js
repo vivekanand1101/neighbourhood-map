@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
+import MapContainer from './mapContainer.js'
+import HeaderContainer from './headerContainer.js'
 import './App.css';
 
 class App extends Component {
+  toggleMenu = (clickEvent) => {
+    console.log('coming in togglemenu')
+  }
   render() {
     return (
-      <h1>Tu maarega chhakka</h1>
+      <div>
+        <HeaderContainer menuClickHandler={this.toggleMenu}/>
+        <MapContainer/>
+      </div>
     );
   }
 }

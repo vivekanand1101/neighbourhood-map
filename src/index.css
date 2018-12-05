@@ -1,0 +1,22 @@
+.neighbourhood-header {
+    background-color: black;
+    border: dashed;
+}
+
+.neighbourhood-p {
+    text-align: center;
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.hamburger-menu {
+    width: 5%;
+    max-width: 50px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+    top: 28px;
+    left: 10px;
+    position: relative;
+}
