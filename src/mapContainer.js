@@ -31,7 +31,7 @@ export class MapContainer extends Component {
                     markerAnimation: newProps.google.maps.Animation.BOUNCE,
                     showInfoWindow: true,
                     selectedPlace: newProps,
-                    activeMarker: newProps.locations[0],
+                    // activeMarker: newProps.locations[0],
                     markers: newProps.locations,
                 })
             }
@@ -50,28 +50,37 @@ export class MapContainer extends Component {
             markerAnimation: props.google.maps.Animation.BOUNCE,
             markers: [marker]
         })
+        // this.onInfoOpen()
     }
 
     onInfoOpen = () => {
+        const query = this.state.selectedPlace.name 
         const params = {
-            'll': `${this.state.activeMarker.position.lat},${this.state.activeMarker.position.lng}`,
-            'query': this.state.selectedPlace.name,
+            'll': `${this.state.selectedPlace.position.lat},${this.state.selectedPlace.position.lng}`,
+            'query': query
         }
-        console.log(params)
-        console.log(this.state.activeMarker.position)
         foursquare.venues.suggestCompletion(params)
-            .then(res => {console.log(res)});
+            .then(res => {
+                const venues = res.response.minivenues
+                if (venues.length >= 1) {
+                    const firstVenue = venues[0].location
+                    if (firstVenue !== undefined) {
+                        return firstVenue.address
+                    }
+                }
+                return this.state.selectedPlace.name
+            })
     }
 
     render() {
         return (
             <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}>
                 {this.state.markers.map((location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} position={location.position} animation={this.state.markerAnimation}/>)}
-                {this.state.activeMarker && 
+                {this.state.activeMarker &&
                 <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={this.state.showInfoWindow}>
                     <div>
-                        {/* <h1>{this.state.selectedPlace.name}</h1> */}
-                        {this.onInfoOpen()}
+                        <h1>{this.onInfoOpen()}</h1>
+                        <h1>wtfbors</h1>
                     </div>
                 </InfoWindow>
                 }
