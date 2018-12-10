@@ -40,8 +40,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ListPlacesContainer locations={this.state.locations} updateLocations={this.filterLocations} pickLocation={this.filterLocations} resetLocations={this.resetLocations}/>
         <HeaderContainer menuClickHandler={this.toggleMenu}/>
+        <ListPlacesContainer locations={this.state.locations} updateLocations={this.filterLocations} pickLocation={this.filterLocations} resetLocations={this.resetLocations}/>
         <MapContainer locations={this.state.locations} initialLocation={this.state.initialLocation}
           scaleControl={true} resetLocations={this.resetLocations} updateActiveMarker={this.updateActiveMarker}
           activeMarker={this.state.activeMarker}

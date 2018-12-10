@@ -1,6 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
 .neighbourhood-header {
     background-color: black;
     border: dashed;
+    position: fixed;
+    width: 100%;
 }
 
 .neighbourhood-p {
@@ -18,5 +24,35 @@
     margin: 6px 0;
     top: 28px;
     left: 10px;
+    position: relative;
+}
+
+.places-list-item {
+    font-size: 16px;
+    text-align: left;
+    padding: 5px 5px 5px 7px;
+    color: grey;
+    margin-bottom: 5px;
+    transition: color .5s;
+}
+
+.places-list {
+    list-style: none;
+    /* position: relative; */
+}
+
+.places-list-item-button i:hover {
+    border: none;
+    cursor: pointer;
+}
+
+.map {
+    height: calc(100vh - 73px);
+    position: relative;
+    transition: margin-left .3s;
+/*    margin: 10px;*/
+}
+
+.locations-list-container {
     position: relative;
 }

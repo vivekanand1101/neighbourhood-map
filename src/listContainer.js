@@ -28,12 +28,14 @@ class ListPlacesContainer extends Component {
     render() {
         const locations = this.props.locations
         return (
-            <div>
+            <div className="locations-list-container">
                 <div className="filter-box">
                     <input type="text" placeholder="Filter locations" value={this.state.query} onChange={this.onQueryUpdate}></input>
                     <button className="reset-button" onClick={this.resetLocations}>Reset</button>
                 </div>
-                {locations.map((location, index) => <p key={index} ><button onClick={this.onLocationClick}>{location.title}</button></p>)}
+                <ul className="places-list">
+                    {locations.map((location, index) => <li key={index} className="places-list-item"><button onClick={this.onLocationClick} className="places-list-item-button">{location.title}</button></li>)}
+                </ul>
             </div>
         )
     }
