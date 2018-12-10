@@ -11,31 +11,41 @@ class App extends Component {
   }
   state = {
     locations: locations,
-    initialLocation: initialLocation
+    initialLocation: initialLocation,
+    activeMarker: null,
   }
   filterLocations = (queryValue) => {
     const filteredLocations = locations.filter((location) => location.title.toUpperCase().indexOf(queryValue.toUpperCase()) > -1 )
     this.setState({
-      locations: filteredLocations
+      locations: filteredLocations,
     })
+    if (filteredLocations.length !== 1) {
+      this.setState({
+        activeMarker: null
+      })
+    }
   }
-  pickLocation = (location_title) => {
-    const filteredLocation = locations.filter((location) => location.title.toUpperCase().indexOf(location_title.toUpperCase()) > -1 )
-    this.setState({
-      locations: filteredLocation
-    })
-  }
-  resetLocation = () => {
+  resetLocations = () => {
     this.setState({
       locations: locations,
+      activeMarker: null,
+    })
+  }
+  updateActiveMarker = (marker) => {
+    this.setState({
+      activeMarker: marker,
+      locations: [marker.location]
     })
   }
   render() {
     return (
       <div>
-        <ListPlacesContainer locations={this.state.locations} updateLocations={this.filterLocations} pickLocation={this.pickLocation} resetLocations={this.resetLocation}/>
+        <ListPlacesContainer locations={this.state.locations} updateLocations={this.filterLocations} pickLocation={this.filterLocations} resetLocations={this.resetLocations}/>
         <HeaderContainer menuClickHandler={this.toggleMenu}/>
-        <MapContainer locations={this.state.locations} initialLocation={this.state.initialLocation} scaleControl={true}/>
+        <MapContainer locations={this.state.locations} initialLocation={this.state.initialLocation}
+          scaleControl={true} resetLocations={this.resetLocations} updateActiveMarker={this.updateActiveMarker}
+          activeMarker={this.state.activeMarker}
+        />
       </div>
     );
   }
