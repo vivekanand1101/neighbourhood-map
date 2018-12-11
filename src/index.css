@@ -55,4 +55,5 @@
 
 .locations-list-container {
     position: relative;
+    display: none;
 }

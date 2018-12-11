@@ -34,7 +34,7 @@ class ListPlacesContainer extends Component {
                     <button className="reset-button" onClick={this.resetLocations}>Reset</button>
                 </div>
                 <ul className="places-list">
-                    {locations.map((location, index) => <li key={index} className="places-list-item"><button onClick={this.onLocationClick} className="places-list-item-button">{location.title}</button></li>)}
+                    {locations.map((location, index) => <li key={index} className="places-list-item" onClick={this.onLocationClick}>{location.title}</li>)}
                 </ul>
             </div>
         )
