@@ -16,7 +16,7 @@ class HeaderContainer extends Component {
                     <div className="hamburger-menu"></div>
                     <div className="hamburger-menu"></div>
                 </div>
-                <h1 className="neighbourhood-p">Neighbourhood Bars</h1>
+                <h1 className="neighbourhood-h">Neighbourhood Bars</h1>
             </div>
         )
     }

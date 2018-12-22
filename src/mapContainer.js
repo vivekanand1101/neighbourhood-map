@@ -89,11 +89,10 @@ export class MapContainer extends Component {
         const activeMarker = this.props.activeMarker
         let navClassName = "map-container"
         if (this.props.showNav) {
-            navClassName = `${navClassName} set-margin`
+            navClassName = `${navClassName} adjust-map`
         }
         return (
             <div className={navClassName}>
-            {/* <div id="map-container"> */}
                 <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}
                 onClick={this.onMapClicked}
                 >

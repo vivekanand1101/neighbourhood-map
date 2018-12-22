@@ -76,7 +76,7 @@ h6 {
     overflow: hidden;
 }
 
-.set-margin {
+.adjust-map {
     margin-left: 300px !important;
 }
 
@@ -102,13 +102,13 @@ h6 {
     padding: 10px;
 }
 
-.input-container {
+.filter-container {
     width: 273px;
     margin: 5px auto 15px;
     background-color: white;
 }
 
-.input-container input {
+.filter-container input {
     width: 85%;
     padding: 5px;
     font-size: 16px;
@@ -153,10 +153,6 @@ h6 {
     margin-top: 12px;
 }
 
-.display-btn {
-    display: block !important;
-    transition: display .5s
-}
 
 @media screen and (max-width: 371px) {
     .map-container {
@@ -176,18 +172,14 @@ h6 {
         width: 228px !important;
     }
 
-    .input-container {
+    .filter-container {
         width: 228px !important;
     }
 }
 
 @media screen and (max-width: 650px) {
-    .set-margin{ 
+    .adjust-map{ 
         margin-left: 0 !important;
-    }
-
-    .tool-tip + .tooltip > .tooltip-inner {
-        display: none;
     }
 
     .hamburger-menu {

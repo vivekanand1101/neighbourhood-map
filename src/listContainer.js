@@ -35,7 +35,7 @@ class ListPlacesContainer extends Component {
             <div className="locations-list-container">
                 <div className={navClassName}>
                     <div className="nav-wrapper">
-                        <div className="input-container">
+                        <div className="filter-container">
                             <input type="text" placeholder="Filter locations" value={this.state.query} onChange={this.onQueryUpdate}></input>
                         </div>
                         <div className="list-container">
