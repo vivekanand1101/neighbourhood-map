@@ -189,4 +189,12 @@ h6 {
     .tool-tip + .tooltip > .tooltip-inner {
         display: none;
     }
+
+    .hamburger-menu {
+        width: 7%;
+    }
+
+    .neighbourhood-p {
+        margin-left: 20px;
+    }
 }
