@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 class HeaderContainer extends Component {
     onHamburgerClick = (event) => {
-        console.log("coming in this after:" + event.target)
         if (this.props.menuClickHandler) {
             this.props.menuClickHandler()
         }

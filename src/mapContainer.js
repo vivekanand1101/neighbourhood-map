@@ -98,11 +98,9 @@ export class MapContainer extends Component {
                 >
                     {this.state.markers.map((location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location} position={location.position} animation={this.state.markerAnimation}/>)}
                     {activeMarker &&
-                    // <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={true} onOpen={this.onInfoWindowOpen(activeMarker)}>
                     <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={this.state.showInfoWindow}>
                         <div>
                             <p id="info-window">Bc pata nhi kya ho raha hai</p>
-                            {/* {this.onInfoWindowOpen(activeMarker)} */}
                         </div>
                     </InfoWindow>
                     }
