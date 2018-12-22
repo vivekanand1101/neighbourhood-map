@@ -12,7 +12,6 @@ const foursquare = require('react-foursquare')({
 export class MapContainer extends Component {
     state = {
         markers: [],
-        showInfoWindow: false,
         markerAnimation: null,
         activeMarker: null,
     }
@@ -23,16 +22,12 @@ export class MapContainer extends Component {
         if (newProps.locations !== this.state.markers) {
             this.setState({
                 markers: newProps.locations,
-                markerAnimation: null,
             })
             if (newProps.locations.length === 1) {
                 const activeLocation = this.props.locations[0]
                 const activeMarker = <Marker name={activeLocation.title} onClick={this.markerClicked} location={activeLocation}
-                                                position={activeLocation.position} animation={this.state.markerAnimation}/>
+                                                position={activeLocation.position} animation={newProps.google.maps.Animation.BOUNCE}/>
                 this.setState({
-                    markerAnimation: newProps.google.maps.Animation.BOUNCE,
-                    showInfoWindow: true,
-                    markers: newProps.locations,
                     activeMarker: activeMarker
                 })
             }
@@ -45,17 +40,14 @@ export class MapContainer extends Component {
         if (this.props.locations.length === 1) {
             const activeLocation = this.props.locations[0]
             const activeMarker = <Marker name={activeLocation.title} onClick={this.markerClicked} location={activeLocation}
-                                            position={activeLocation.position} animation={this.state.markerAnimation}/>
+                                            position={activeLocation.position} animation={this.props.google.maps.Animation.BOUNCE}/>
             this.setState({
                 activeMarker: activeMarker,
-                showInfoWindow: true,
             })
         }
     }
     markerClicked = (props, marker, _event) => {
         this.setState({
-            showInfoWindow: true,
-            markerAnimation: props.google.maps.Animation.BOUNCE,
             markers: [marker.location],
             activeMarker: marker,
         })
@@ -103,14 +95,17 @@ export class MapContainer extends Component {
             <div className={navClassName}>
                 <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}
                 onClick={this.onMapClicked}>
-                    {this.state.markers.map(
-                        (location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location}
-                                            position={location.position} animation={this.state.markerAnimation}/>)}
+                    {this.state.markers.length > 1 &&
+                        this.state.markers.map(
+                            (location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location}
+                                                position={location.position}/>)
+                    }
+                    {this.state.markers.length === 1 && this.state.activeMarker}
                     {this.state.activeMarker &&
-                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={this.state.showInfoWindow}>
+                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={this.state.activeMarker !== null}>
                         <div>
                             <p id="info-window">
-                            {this.state.infoWidowContent}
+                            {/* {this.state.infoWidowContent} */}
                             </p>
                         </div>
                     </InfoWindow>
