@@ -48,10 +48,58 @@ export const locations = [
         placeId: 'ChIJRcpxNejiDDkRzTyvY55hquc'
     },
     {
+        title: 'Decode',
+        position: {lat: 28.6476499, lng: 77.12039109999999},
+        address: 'J2/1 B.K Dutta Market, Rajouri Garden, New Delhi, Delhi 110027, India',
+        placeId: 'ChIJG3uxOHAbDTkRBwgKoRnQY_I'
+    },
+    {
         title: 'Striker Pub',
         position: {lat: 28.5419067, lng: 77.155497},
         address: '3rd Floor , Ambience Mall, Vasant Kunj II, Vasant Kunj, New Delhi, Delhi 110070, India',
         placeId: 'ChIJn70Zuc4dDTkRCcTOsQmc_5o'
+    },
+    {
+        title: 'Tamasha',
+        position: {lat: 28.629626, lng: 77.221668},
+        address: 'A 28, In Anand House, KG Marg, Connaught Place, New Delhi, Delhi 110001, India',
+        placeId: 'ChIJ52Rpnjb9DDkRoefV8uKYSDA'
+    },
+    {
+        title: 'Local',
+        position: {lat: 28.6296622, lng: 77.2210844},
+        address: 'Showroom No 11, Ground Floor, Atmaram Mansion, KG Marg, Connaught Place, New Delhi, Delhi 110001, India',
+        placeId: 'ChIJL8u_hDb9DDkRI1vFuCQrbIs'
+    },
+    {
+        title: '38 Barracks',
+        position: {lat: 28.6331595, lng: 77.2226795},
+        address: 'M-38, Connaught Circus, Opp. Shanker Market, Block M, Connaught Place, New Delhi, Delhi 110001, India',
+        placeId: 'ChIJRzcLMDf9DDkRQr1ZHyrC8WM'
+    },
+    {
+        title: 'Punter House Cafe',
+        position: {lat: 28.5875609, lng: 77.1690067},
+        address: '2, Satya Niketan Rd, Moti Bagh II, Moti Bagh-II, Satya Niketan, South Moti Bagh, New Delhi, Delhi 110021, India',
+        placeId: 'ChIJ____AxMdDTkRXaXBOp0cPdE'
+    },
+    {
+        title: 'Vayu Bar',
+        position: {lat: 28.4682257, lng: 77.0627987},
+        address: 'Sco-32, Sector 29, Gurugram, Haryana 122001, India',
+        placeId: 'ChIJwXbygD8ZDTkRGwIaYtqrD9c'
+    },
+    {
+        title: "Mama's buoi",
+        position: {lat: 28.6930846, lng: 77.2054556},
+        address: '2624, Hudson Ln, Hudson Lane, GTB Nagar, Delhi, 110009, India',
+        placeId: 'ChIJS38E9u39DDkRCoPPL7a2-94'
+    },
+    {
+        title: 'Informal by Imperfecto',
+        position: {lat: 28.627205, lng: 77.22044369999999},
+        address: '52, Tolstoy Ln, Atul Grove Road, Janpath, Connaught Place, New Delhi, Delhi 110001, India',
+        placeId: 'ChIJMUKhUjT9DDkR1sWExnQFcHU'
     },
 ];
 

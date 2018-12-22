@@ -27,15 +27,24 @@ class ListPlacesContainer extends Component {
     }
     render() {
         const locations = this.props.locations
+        let navClassName = "nav-menu"
+        if (this.props.showNav) {
+            navClassName = `${navClassName} open-nav`
+        }
         return (
             <div className="locations-list-container">
-                <div className="filter-box">
-                    <input type="text" placeholder="Filter locations" value={this.state.query} onChange={this.onQueryUpdate}></input>
-                    <button className="reset-button" onClick={this.resetLocations}>Reset</button>
+                <div className={navClassName}>
+                    <div className="nav-wrapper">
+                        <div className="input-container">
+                            <input type="text" placeholder="Filter locations" value={this.state.query} onChange={this.onQueryUpdate}></input>
+                        </div>
+                        <div className="list-container">
+                            <ul className="places-list">
+                                {locations.map((location, index) => <li key={index} className="places-list-item" onClick={this.onLocationClick}>{location.title}</li>)}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <ul className="places-list">
-                    {locations.map((location, index) => <li key={index} className="places-list-item" onClick={this.onLocationClick}>{location.title}</li>)}
-                </ul>
             </div>
         )
     }

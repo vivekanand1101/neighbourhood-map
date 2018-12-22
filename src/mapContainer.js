@@ -87,21 +87,28 @@ export class MapContainer extends Component {
 
     render() {
         const activeMarker = this.props.activeMarker
+        let navClassName = "map-container"
+        if (this.props.showNav) {
+            navClassName = `${navClassName} set-margin`
+        }
         return (
-            <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}
-            onClick={this.onMapClicked}
-            >
-                {this.state.markers.map((location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location} position={location.position} animation={this.state.markerAnimation}/>)}
-                {activeMarker &&
-                // <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={true} onOpen={this.onInfoWindowOpen(activeMarker)}>
-                <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={this.state.showInfoWindow}>
-                    <div>
-                        <p id="info-window">Bc pata nhi kya ho raha hai</p>
-                        {/* {this.onInfoWindowOpen(activeMarker)} */}
-                    </div>
-                </InfoWindow>
-                }
-            </Map>
+            <div className={navClassName}>
+            {/* <div id="map-container"> */}
+                <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}
+                onClick={this.onMapClicked}
+                >
+                    {this.state.markers.map((location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location} position={location.position} animation={this.state.markerAnimation}/>)}
+                    {activeMarker &&
+                    // <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={true} onOpen={this.onInfoWindowOpen(activeMarker)}>
+                    <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={this.state.showInfoWindow}>
+                        <div>
+                            <p id="info-window">Bc pata nhi kya ho raha hai</p>
+                            {/* {this.onInfoWindowOpen(activeMarker)} */}
+                        </div>
+                    </InfoWindow>
+                    }
+                </Map>
+            </div>
         )
     }
 }

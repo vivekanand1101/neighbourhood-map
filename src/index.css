@@ -2,18 +2,39 @@
     box-sizing: border-box;
 }
 
-.neighbourhood-header {
-    background-color: black;
-    border: dashed;
-    position: fixed;
-    width: 100%;
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.neighbourhood-p {
-    text-align: center;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+.flex-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#root {
+    height: 100%;
+}
+
+.neighbourhood-header{
+    margin: 0;
+    padding: 5px;
     color: white;
-    font-size: 21px;
-    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.88);
+    text-align: center;
+    font-size: 15px;
 }
 
 .hamburger-menu {
@@ -27,33 +48,145 @@
     position: relative;
 }
 
+.hamburger-father:hover {
+    cursor: pointer;
+}
+
+.neighbourhood-p{
+    width: 90%;
+}
+
+#root {
+    overflow: hidden;
+}
+
+.map-container {
+    height: calc(100vh - 73px);
+    position: relative;
+    transition: margin-left .3s;
+}
+
+#map {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    width: 100%;
+    height: calc(100% - 0px);
+    overflow: hidden;
+}
+
+.set-margin {
+    margin-left: 300px !important;
+}
+
+.locations-list-container {
+    position: relative;
+    background-color: yellow;
+}
+
+.nav-menu {
+    width: 0;
+    z-index: 1;
+    position: fixed;
+    top:72px;
+    left: 0;
+    height: calc(100% - 72px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: rgba(0, 0, 0, 0.88);
+    transition: width .3s ease;
+}
+
+.nav-wrapper {
+    padding: 10px;
+}
+
+.input-container {
+    width: 273px;
+    margin: 5px auto 15px;
+    background-color: white;
+}
+
+.input-container input {
+    width: 85%;
+    padding: 5px;
+    font-size: 16px;
+    outline: none;
+    border: 0px;
+}
+
+.places-list {
+    width: 273px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .places-list-item {
     font-size: 16px;
     text-align: left;
     padding: 5px 5px 5px 7px;
     color: grey;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
     transition: color .5s;
 }
 
-.places-list {
-    list-style: none;
-    /* position: relative; */
+.active {
+    background-color: rgb(39, 35, 35);
+    border-left: 2px solid orange;
+    padding-left: 5px;
+    color: white;
 }
 
-.places-list-item-button i:hover {
-    border: none;
+.places-list-item:hover {
+    background-color: rgb(39, 35, 35);
+    border-left: 2px solid yellow;
+    padding-left: 5px;
+    color: white;
     cursor: pointer;
 }
 
-.map {
-    height: calc(100vh - 73px);
-    position: relative;
-    transition: margin-left .3s;
-/*    margin: 10px;*/
+
+.open-nav {
+    width: 300px !important;
+    margin-top: 12px;
 }
 
-.locations-list-container {
-    position: relative;
-    display: none;
+.display-btn {
+    display: block !important;
+    transition: display .5s
+}
+
+@media screen and (max-width: 371px) {
+    .map-container {
+        height: calc(100vh - 109px);
+    }
+
+    .nav-menu {
+        top: 108px;
+        height: calc(100% - 108px);
+    }
+
+    .open-nav {
+        width: 255px !important;
+    }
+
+    .location-list {
+        width: 228px !important;
+    }
+
+    .input-container {
+        width: 228px !important;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .set-margin{ 
+        margin-left: 0 !important;
+    }
+
+    .tool-tip + .tooltip > .tooltip-inner {
+        display: none;
+    }
 }
