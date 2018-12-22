@@ -14,7 +14,6 @@ class App extends Component {
   state = {
     locations: locations,
     initialLocation: initialLocation,
-    activeMarker: null,
     showNav: false,
   }
   filterLocations = (queryValue) => {
@@ -22,22 +21,10 @@ class App extends Component {
     this.setState({
       locations: filteredLocations,
     })
-    if (filteredLocations.length !== 1) {
-      this.setState({
-        activeMarker: null
-      })
-    }
   }
   resetLocations = () => {
     this.setState({
       locations: locations,
-      activeMarker: null,
-    })
-  }
-  updateActiveMarker = (marker) => {
-    this.setState({
-      activeMarker: marker,
-      locations: [marker.location]
     })
   }
   render() {
@@ -49,8 +36,7 @@ class App extends Component {
           showNav={this.state.showNav}
         />
         <MapContainer locations={this.state.locations} initialLocation={this.state.initialLocation}
-          scaleControl={true} resetLocations={this.resetLocations} updateActiveMarker={this.updateActiveMarker}
-          activeMarker={this.state.activeMarker} showNav={this.state.showNav}
+          scaleControl={true} resetLocations={this.resetLocations} showNav={this.state.showNav}
         />
       </div>
     );

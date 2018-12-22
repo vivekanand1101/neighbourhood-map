@@ -13,8 +13,8 @@ export class MapContainer extends Component {
     state = {
         markers: [],
         showInfoWindow: false,
-        selectedPlace: {},
         markerAnimation: null,
+        activeMarker: null,
     }
     componentDidMount = () => {
         this.addMarkers()
@@ -26,11 +26,14 @@ export class MapContainer extends Component {
                 markerAnimation: null,
             })
             if (newProps.locations.length === 1) {
+                const activeLocation = this.props.locations[0]
+                const activeMarker = <Marker name={activeLocation.title} onClick={this.markerClicked} location={activeLocation}
+                                                position={activeLocation.position} animation={this.state.markerAnimation}/>
                 this.setState({
                     markerAnimation: newProps.google.maps.Animation.BOUNCE,
                     showInfoWindow: true,
-                    selectedPlace: newProps,
                     markers: newProps.locations,
+                    activeMarker: activeMarker
                 })
             }
         }
@@ -39,17 +42,23 @@ export class MapContainer extends Component {
         this.setState({
             markers: this.props.locations,
         })
+        if (this.props.locations.length === 1) {
+            const activeLocation = this.props.locations[0]
+            const activeMarker = <Marker name={activeLocation.title} onClick={this.markerClicked} location={activeLocation}
+                                            position={activeLocation.position} animation={this.state.markerAnimation}/>
+            this.setState({
+                activeMarker: activeMarker,
+                showInfoWindow: true,
+            })
+        }
     }
     markerClicked = (props, marker, _event) => {
         this.setState({
             showInfoWindow: true,
-            selectedPlace: props,
             markerAnimation: props.google.maps.Animation.BOUNCE,
-            markers: [marker]
+            markers: [marker.location],
+            activeMarker: marker,
         })
-        if (this.props.updateActiveMarker) {
-            this.props.updateActiveMarker(marker)
-        }
     }
 
     onInfoWindowOpen = (activeMarker) => {
@@ -86,7 +95,6 @@ export class MapContainer extends Component {
     }
 
     render() {
-        const activeMarker = this.props.activeMarker
         let navClassName = "map-container"
         if (this.props.showNav) {
             navClassName = `${navClassName} adjust-map`
@@ -94,13 +102,16 @@ export class MapContainer extends Component {
         return (
             <div className={navClassName}>
                 <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}
-                onClick={this.onMapClicked}
-                >
-                    {this.state.markers.map((location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location} position={location.position} animation={this.state.markerAnimation}/>)}
-                    {activeMarker &&
-                    <InfoWindow onClose={this.onInfoWindowClose} marker={activeMarker} visible={this.state.showInfoWindow}>
+                onClick={this.onMapClicked}>
+                    {this.state.markers.map(
+                        (location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location}
+                                            position={location.position} animation={this.state.markerAnimation}/>)}
+                    {this.state.activeMarker &&
+                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={this.state.showInfoWindow}>
                         <div>
-                            <p id="info-window">Bc pata nhi kya ho raha hai</p>
+                            <p id="info-window">
+                            {this.state.infoWidowContent}
+                            </p>
                         </div>
                     </InfoWindow>
                     }
