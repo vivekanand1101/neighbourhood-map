@@ -90,12 +90,6 @@ export const locations = [
         placeId: 'ChIJwXbygD8ZDTkRGwIaYtqrD9c'
     },
     {
-        title: "Mama's buoi",
-        position: {lat: 28.6930846, lng: 77.2054556},
-        address: '2624, Hudson Ln, Hudson Lane, GTB Nagar, Delhi, 110009, India',
-        placeId: 'ChIJS38E9u39DDkRCoPPL7a2-94'
-    },
-    {
         title: 'Informal by Imperfecto',
         position: {lat: 28.627205, lng: 77.22044369999999},
         address: '52, Tolstoy Ln, Atul Grove Road, Janpath, Connaught Place, New Delhi, Delhi 110001, India',

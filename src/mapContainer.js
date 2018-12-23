@@ -52,6 +52,7 @@ export class MapContainer extends Component {
             markers: [marker.location],
             activeMarker: marker,
         })
+        this.onInfoWindowOpen()
     }
 
     onInfoWindowOpen = () => {
@@ -66,15 +67,24 @@ export class MapContainer extends Component {
         let out = query
         foursquare.venues.suggestCompletion(params)
             .then(res => {
+                if (res.meta.code !== 200) {
+                    this.setState({
+                        infoWindowContent: 'FourSquare data not available'
+                    })
+                }
                 const venues = res.response.minivenues
                 if (venues.length >= 1) {
                     const firstVenue = venues[0].location
-                    if (firstVenue !== undefined) {
+                    if (firstVenue !== undefined && firstVenue !== '') {
                         out = firstVenue.address
                     }
                 }
                 this.setState({
                     infoWindowContent: out
+                })
+            }).catch(res => {
+                this.setState({
+                    infoWindowContent: 'Foursqare api failure'
                 })
             })
     }
@@ -83,6 +93,7 @@ export class MapContainer extends Component {
         this.setState({
             activeMarker: null,
             markerAnimation: null,
+            infoWindowContent: 'Loading...',
         })
         if (this.props.resetLocations) {
             this.props.resetLocations()
@@ -118,7 +129,7 @@ export class MapContainer extends Component {
                             {this.state.activeMarker.name}
                             </h3>
                             <p className="info-window-para">
-                            <strong>FourSquareContent: </strong>{this.state.infoWindowContent}
+                            <strong>Address from FourSquare: </strong>{this.state.infoWindowContent}
                             </p>
                         </div>
                     </InfoWindow>
