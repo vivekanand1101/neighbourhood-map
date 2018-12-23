@@ -110,8 +110,10 @@ export class MapContainer extends Component {
             navClassName = `${navClassName} adjust-map`
         }
         let animation = null
+        let showInfoWindow = false
         if (this.state.activeMarker) {
             animation = this.props.google.maps.Animation.BOUNCE
+            showInfoWindow = true
         }
         return (
             <div className={navClassName}>
@@ -123,7 +125,7 @@ export class MapContainer extends Component {
                                                 position={location.position} animation={animation}/>)
                     }
                     {this.state.activeMarker &&
-                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={true} onOpen={this.onInfoWindowOpen}>
+                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={showInfoWindow} onOpen={this.onInfoWindowOpen}>
                         <div>
                             <h3 id="info-window">
                             {this.state.activeMarker.name}
