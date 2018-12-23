@@ -18,6 +18,8 @@ class App extends Component {
   }
   filterLocations = (queryValue) => {
     const filteredLocations = locations.filter((location) => location.title.toUpperCase().indexOf(queryValue.toUpperCase()) > -1 )
+    console.log("filtered locations")
+    console.log(filteredLocations)
     this.setState({
       locations: filteredLocations,
     })

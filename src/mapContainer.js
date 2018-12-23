@@ -14,6 +14,7 @@ export class MapContainer extends Component {
         markers: [],
         markerAnimation: null,
         activeMarker: null,
+        infoWindowContent: 'Loading...',
     }
     componentDidMount = () => {
         this.addMarkers()
@@ -53,7 +54,8 @@ export class MapContainer extends Component {
         })
     }
 
-    onInfoWindowOpen = (activeMarker) => {
+    onInfoWindowOpen = () => {
+        let activeMarker = this.state.activeMarker
         const query = activeMarker.name
         const lat = activeMarker.position.lat()
         const lng = activeMarker.position.lng()
@@ -64,7 +66,6 @@ export class MapContainer extends Component {
         let out = query
         foursquare.venues.suggestCompletion(params)
             .then(res => {
-                const infoElement = document.getElementById("info-window")
                 const venues = res.response.minivenues
                 if (venues.length >= 1) {
                     const firstVenue = venues[0].location
@@ -72,11 +73,17 @@ export class MapContainer extends Component {
                         out = firstVenue.address
                     }
                 }
-                infoElement.textContent = out
+                this.setState({
+                    infoWindowContent: out
+                })
             })
     }
 
     onInfoWindowClose = () => {
+        this.setState({
+            activeMarker: null,
+            markerAnimation: null,
+        })
         if (this.props.resetLocations) {
             this.props.resetLocations()
         }
@@ -91,21 +98,27 @@ export class MapContainer extends Component {
         if (this.props.showNav) {
             navClassName = `${navClassName} adjust-map`
         }
+        let animation = null
+        if (this.state.activeMarker) {
+            animation = this.props.google.maps.Animation.BOUNCE
+        }
         return (
             <div className={navClassName}>
                 <Map google={this.props.google} zoom={11} initialCenter={this.props.initialLocation} style={{height: '100%', position: 'relative', width: '100%' }}
                 onClick={this.onMapClicked}>
-                    {this.state.markers.length > 1 &&
+                    {this.state.markers.length > 0 &&
                         this.state.markers.map(
                             (location, idx) => <Marker key={idx} name={location.title} onClick={this.markerClicked} location={location}
-                                                position={location.position}/>)
+                                                position={location.position} animation={animation}/>)
                     }
-                    {this.state.markers.length === 1 && this.state.activeMarker}
                     {this.state.activeMarker &&
-                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={this.state.activeMarker !== null}>
+                    <InfoWindow onClose={this.onInfoWindowClose} marker={this.state.activeMarker} visible={true} onOpen={this.onInfoWindowOpen}>
                         <div>
-                            <p id="info-window">
-                            {/* {this.state.infoWidowContent} */}
+                            <h3 id="info-window">
+                            {this.state.activeMarker.name}
+                            </h3>
+                            <p className="info-window-para">
+                            <strong>FourSquareContent: </strong>{this.state.infoWindowContent}
                             </p>
                         </div>
                     </InfoWindow>
